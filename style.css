@@ -13,8 +13,30 @@ body {
     background-color: #f0f0f0;
 }
 
+.difficulty-list {
+    margin-bottom: 50px;
+}
+
+.symbol-container {
+    display: flex;
+    gap: 20px;
+}
+
+.symbol-x, .symbol-o {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 150px;
+    height: 25px;
+    font-size: 15px;
+    font-weight: 900;
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+
 .game-title {
-    margin-bottom: 150px;
+    margin-bottom: 70px;
 }
 
 .grid {
