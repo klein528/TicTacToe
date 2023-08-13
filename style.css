@@ -35,6 +35,16 @@ body {
     margin-bottom: 50px;
 }
 
+.symbol-x:hover, .symbol-o:hover {
+    cursor: pointer;
+    background-color: white;
+}
+
+.symbol-x:active, .symbol-o:active {
+    cursor: pointer;
+    background-color: #c5dfe4;
+}
+
 .game-title {
     margin-bottom: 70px;
 }
@@ -44,9 +54,7 @@ body {
     grid-template-columns: repeat(3, 100px);
     gap: 0;
     background-color: #fff;
-    border: 2px solid #333;
     border-radius: 5px;
-    width: 306px;
 }
 
 .cell {
@@ -60,13 +68,10 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     background-color: #fff;
-    border: none;
+    border: 1px solid black;
     outline: none;
 }
 
 .cell:hover {
     background-color: #f0f0f0;
 }
-
-
-
