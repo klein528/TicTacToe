@@ -68,7 +68,6 @@ const GameController = (() => {
             
             switchPlayer();
             
-            
         }
     };
 
@@ -93,15 +92,17 @@ const handleClick = (index) => {
     GameController.handleMove(index);
     renderBoard();
 
+}
     if (GameBoard.checkWinner("X") || GameBoard.checkWinner("O")) {
         console.log("Game over. A player has won!");
         gameCells.forEach((cell) => {
             cell.removeEventListener("click", handleClick);
         });
+        
+        gameCells[index].textContent = GameBoard.board[index];
+
     }
 
-    gameCells[index].textContent = GameBoard.board[index];
-};
 
 const gameCells = document.querySelectorAll(".cell");
 gameCells.forEach((cell, index) => {
