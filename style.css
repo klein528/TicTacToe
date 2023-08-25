@@ -75,3 +75,21 @@ body {
 .cell:hover {
     background-color: #f0f0f0;
 }
+
+.reset-button {
+    margin-top: 20px;
+    padding: 5px 40px;
+    border: 1px solid black;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.reset-button:hover {
+    cursor: pointer;
+    background-color: white;
+    font-size: 15px;
+}
+
+.reset-button:active {
+    background-color: rgb(18, 118, 120);
+}
