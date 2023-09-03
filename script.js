@@ -24,12 +24,28 @@ const gameBoard = (() => {
     const symbolX = document.querySelector('.symbol-x');
     const symbolO = document.querySelector('.symbol-o');
     const gameMessage = document.getElementById("game-message");
+    const chooseXButton = document.getElementById("choose-x");
+    const chooseOButton = document.getElementById("choose-o");
+
+    chooseXButton.addEventListener("click", () => {
+        if (!gameIsOver) {
+            currentPlayer = player1;
+            showMessage("")
+        }
+    });
+
+    chooseOButton.addEventListener("click", () => {
+        if (!gameIsOver) {
+            currentPlayer = player2;
+            showMessage("")
+        }
+    });
 
     let gameIsOver = false;
   
-    const player1 = Player('Player 1', 'X'); // Define player1
-    const player2 = Player('Player 2', 'O'); // Define player2
-    let currentPlayer = player1; // Initialize currentPlayer
+    const player1 = Player('Player 1', 'X');
+    const player2 = Player('Player 2', 'O');
+    let currentPlayer = player1;
   
     const updateCell = (index) => {
       cells[index].textContent = currentPlayer.symbol;
@@ -50,17 +66,15 @@ const gameBoard = (() => {
       for (const pattern of winPatterns) {
         const [a, b, c] = pattern;
         if (board[a] && board[a] === board[b] && board[b] === board[c]) {
-          // We have a winner
+
           showMessage(`${currentPlayer.name} wins!`);
           gameIsOver = true;
           return;
         }
       }
     
-      // Check for a tie (all spots filled)
       if (!board.includes('')) {
-        // It's a tie
-        // You can display a message, update the UI, and handle game over here
+        
         showMessage("It's a tie!");
         gameIsOver = true;
       }
