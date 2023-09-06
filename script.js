@@ -11,22 +11,98 @@ const gameBoard = (() => {
       return false;
     };
   
-    return { getBoard, markSpot };
+    return { getBoard, isSpotTaken, markSpot };
   })();
   
-  const Player = (name, symbol) => ({ name, symbol });
+  const Player = (name, symbol, type, isAI = false) => ({ name, symbol, type, isAI });
+  
 
   // Display controller module
   const displayController = (() => {
     const cells = document.querySelectorAll('.cell');
     const resetButton = document.getElementById('re-button');
-    const difficultyList = document.querySelector('.difficulty-list');
-    const symbolX = document.querySelector('.symbol-x');
-    const symbolO = document.querySelector('.symbol-o');
     const gameMessage = document.getElementById("game-message");
     const chooseXButton = document.getElementById("choose-x");
     const chooseOButton = document.getElementById("choose-o");
+    /*
+    const difficultyList = document.getElementById("difficulty-list");
 
+    difficultyList.addEventListener('change', () => {
+    const selectedDifficulty = difficultyList.value;
+
+    if (selectedDifficulty === 'p1-vs-p2') {
+        currentPlayer = player1;
+        showMessage('');
+    } else if (selectedDifficulty === 'easy') {
+        currentPlayer = player1;
+        showMessage('');
+        currentPlayerOpponent = easyAI; // Set the AI opponent
+        if (currentPlayer.isAI) {
+            setTimeout(makeAIMove, 500); // Add a delay for the AI's move
+        }
+    } else if (selectedDifficulty === 'medium') {
+        currentPlayer = player1;
+        showMessage('');
+        currentPlayerOpponent = mediumAI; // Set the AI opponent
+        if (currentPlayer.isAI) {
+            setTimeout(makeAIMove, 500); // Add a delay for the AI's move
+        }
+    } else if (selectedDifficulty === 'hard') {
+        currentPlayer = player1;
+        showMessage('');
+        currentPlayerOpponent = hardAI; // Set the AI opponent
+        if (currentPlayer.isAI) {
+            setTimeout(makeAIMove, 500); // Add a delay for the AI's move
+        }
+    } else if (selectedDifficulty === 'unbeatable') {
+        currentPlayer = player1;
+        showMessage('');
+        currentPlayerOpponent = unbeatableAI; // Set the AI opponent
+        if (currentPlayer.isAI) {
+            setTimeout(makeAIMove, 500); // Add a delay for the AI's move
+        }
+    }
+
+});
+
+    const makeAIMove = () => {
+        console.log("makeAIMove called");
+        if (gameIsOver || !currentPlayer.isAI) {
+            return; // Game is over or the current player is not an AI
+        }
+
+        if (currentPlayerOpponent === easyAI) {
+            const aiMove = getRandomEmptyCell();
+            if (aiMove !== null) {
+                gameBoard.markSpot(aiMove, currentPlayer.symbol);
+                updateCell(aiMove);
+                checkGameStatus();
+                switchPlayer();
+            }
+        } else if (currentPlayerOpponent === mediumAI) {
+            // Add logic for the medium AI here
+            // Implement a more challenging AI strategy
+        } else if (currentPlayerOpponent === hardAI) {
+            // Add logic for the hard AI here
+            // Implement an even more challenging AI strategy
+        } else if (currentPlayerOpponent === unbeatableAI) {
+            // Add logic for the unbeatable AI here
+            // Implement a very strong AI strategy
+        }
+    };
+
+    const getRandomEmptyCell = () => {
+        const emptyCells = [];
+        for (let i = 0; i < 9; i++) {
+          if (!gameBoard.isSpotTaken(i)) {
+            emptyCells.push(i);
+          }
+        }
+        if (emptyCells.length === 0) return null;
+        const randomIndex = Math.floor(Math.random() * emptyCells.length);
+        return emptyCells[randomIndex];
+      };
+      */
     chooseXButton.addEventListener("click", () => {
         if (!gameIsOver) {
             currentPlayer = player1;
@@ -43,8 +119,8 @@ const gameBoard = (() => {
 
     let gameIsOver = false;
   
-    const player1 = Player('Player 1', 'X');
-    const player2 = Player('Player 2', 'O');
+    const player1 = Player('Player 1', 'X', "human");
+    const player2 = Player('Player 2', 'O', "human");
     let currentPlayer = player1;
   
     const updateCell = (index) => {
@@ -86,7 +162,7 @@ const gameBoard = (() => {
   
     const handleCellClick = (event) => {
         if (gameIsOver) {
-          return; // Game is already over, do nothing
+          return;
         }
         
         const cellIndex = event.target.id.split('-')[1];
@@ -96,8 +172,6 @@ const gameBoard = (() => {
           switchPlayer();
         }
       };
-  
-    // ...
   
     cells.forEach((cell) => {
       cell.addEventListener('click', handleCellClick);
@@ -123,5 +197,4 @@ const gameBoard = (() => {
     resetButton.addEventListener('click', handleResetButtonClick);
   
     return { updateCell };
-  })();
-  
+})();
